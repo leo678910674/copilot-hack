@@ -15,6 +15,12 @@
 - 一键导出 JSON 数据备份；导入之前会验证备份格式，并在覆盖已有数据前要求确认。
 - 支持安装为桌面 / 手机 PWA，首次访问时即可缓存应用资源，之后能够离线使用。
 
+## 在线使用与安装
+
+- **在线网址（HTTPS，支持手机和电脑）**：https://leo678910674.github.io/copilot-hack/
+- **下载完整 Windows / PWA 安装包**：[manmanlai-study-life-installer.zip](https://github.com/leo678910674/copilot-hack/releases/download/manmanlai-v1.0.0/manmanlai-study-life-installer.zip)。
+- **手机安装**：使用手机浏览器打开在线网址，选择“安装应用”或“添加到主屏幕”。iPhone / iPad 请在 Safari 中选择“分享 → 添加到主屏幕”。首次访问需要网络以缓存应用，之后可离线使用。
+
 ## 使用
 
 可以直接打开 `index.html`，也可以使用 Python 提供本地静态服务：
@@ -25,7 +31,7 @@ python -m http.server 8000
 
 然后访问 `http://localhost:8000`。页面使用原生 HTML、CSS 和 JavaScript，不需要构建步骤。
 
-GitHub Pages 网站部署完成后，Windows 用户可双击随附的“安装.cmd”启动离线版；桌面浏览器可通过“安装应用”安装 PWA。手机和平板直接打开 HTTPS 网站后选择浏览器“安装 / 添加到主屏幕”。iPhone / iPad 请通过 Safari 的“分享 → 添加到主屏幕”安装。
+Windows 用户解压安装包后双击“安装.cmd”即可启动；桌面浏览器也可打开在线网站安装 PWA。手机和平板请打开在线 HTTPS 网站选择浏览器“安装 / 添加到主屏幕”。iPhone / iPad 请通过 Safari 的“分享 → 添加到主屏幕”安装。
 
 ## 设计参考
 
