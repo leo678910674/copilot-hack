@@ -8,6 +8,43 @@
   const currentDate = dateKey(today);
   const thisMonday = new Date(today);
   thisMonday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+  const starterRecords = {
+    tasks: [
+      { id: "task-1", title: "完成高数第三章习题", time: "10:30", priority: "high", done: false },
+      { id: "task-2", title: "整理英语课堂笔记", time: "14:00", priority: "normal", done: true },
+      { id: "task-3", title: "给妈妈打个电话", time: "晚上", priority: "low", done: false },
+      { id: "task-4", title: "阅读《也许你该找个人聊聊》", time: "20:30", priority: "normal", done: false }
+    ],
+    schedules: [
+      { id: "schedule-1", type: "course", title: "高等数学", day: 0, start: "08:00", end: "09:40", location: "教学楼 A203" },
+      { id: "schedule-2", type: "course", title: "大学英语", day: 0, start: "10:00", end: "11:40", location: "外语楼 301" },
+      { id: "schedule-3", type: "course", title: "程序设计基础", day: 1, start: "14:00", end: "15:40", location: "实验楼 2-104" },
+      { id: "schedule-4", type: "study", title: "图书馆 · 专注学习", day: 1, start: "19:00", end: "20:00", location: "图书馆 3F" },
+      { id: "schedule-5", type: "course", title: "中国近现代史", day: 2, start: "08:00", end: "09:40", location: "文科楼 405" },
+      { id: "schedule-6", type: "course", title: "大学物理", day: 3, start: "10:00", end: "11:40", location: "教学楼 B102" },
+      { id: "schedule-7", type: "study", title: "英语听力练习", day: 4, start: "15:00", end: "15:40", location: "宿舍 / 自习室" },
+      { id: "schedule-8", type: "course", title: "体育 · 羽毛球", day: 4, start: "16:00", end: "17:40", location: "体育馆 2 号场" }
+    ],
+    studyLogs: [
+      { id: "study-1", title: "高数习题", minutes: 35 },
+      { id: "study-2", title: "英语单词", minutes: 20 }
+    ],
+    habits: [
+      { id: "habit-1", title: "阅读 30 分钟", icon: "▤", streak: 6, checked: true },
+      { id: "habit-2", title: "喝够 8 杯水", icon: "♧", streak: 3, checked: false },
+      { id: "habit-3", title: "拉伸 / 运动", icon: "⌁", streak: 2, checked: false }
+    ],
+    goals: [
+      { id: "goal-reading", type: "reading", title: "每月阅读", current: 4, target: 6, unit: "本", icon: "▤" },
+      { id: "goal-weight", type: "weight", title: "体重记录", current: 54.2, target: 53, unit: "kg", icon: "♡" },
+      { id: "goal-exercise", type: "exercise", title: "本周运动", current: 2, target: 4, unit: "次", icon: "⌁" }
+    ],
+    transactions: [
+      { id: "transaction-1", title: "食堂午餐", category: "餐饮", amount: 18, type: "expense" },
+      { id: "transaction-2", title: "打印课程资料", category: "学习", amount: 8, type: "expense" },
+      { id: "transaction-3", title: "本月生活费", category: "生活费", amount: 2500, type: "income" }
+    ]
+  };
   const dateAt = (offset) => {
     const date = new Date(thisMonday);
     date.setDate(date.getDate() + offset);
@@ -19,43 +56,15 @@
     return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
   };
   const defaults = () => ({
-    budget: 2500,
-    tasks: [
-      { id: "task-1", title: "完成高数第三章习题", time: "10:30", priority: "high", done: false, date: currentDate },
-      { id: "task-2", title: "整理英语课堂笔记", time: "14:00", priority: "normal", done: true, date: currentDate },
-      { id: "task-3", title: "给妈妈打个电话", time: "晚上", priority: "low", done: false, date: currentDate },
-      { id: "task-4", title: "阅读《也许你该找个人聊聊》", time: "20:30", priority: "normal", done: false, date: currentDate }
-    ],
-    schedules: [
-      { id: "schedule-1", type: "course", title: "高等数学", day: 0, start: "08:00", end: "09:40", location: "教学楼 A203" },
-      { id: "schedule-2", type: "course", title: "大学英语", day: 0, start: "10:00", end: "11:40", location: "外语楼 301" },
-      { id: "schedule-3", type: "course", title: "程序设计基础", day: 1, start: "14:00", end: "15:40", location: "实验楼 2-104" },
-      { id: "schedule-4", type: "study", title: "图书馆 · 专注学习", day: 1, date: dateAt(1), start: "19:00", end: "20:00", location: "图书馆 3F" },
-      { id: "schedule-5", type: "course", title: "中国近现代史", day: 2, start: "08:00", end: "09:40", location: "文科楼 405" },
-      { id: "schedule-6", type: "course", title: "大学物理", day: 3, start: "10:00", end: "11:40", location: "教学楼 B102" },
-      { id: "schedule-7", type: "study", title: "英语听力练习", day: 4, date: dateAt(4), start: "15:00", end: "15:40", location: "宿舍 / 自习室" },
-      { id: "schedule-8", type: "course", title: "体育 · 羽毛球", day: 4, start: "16:00", end: "17:40", location: "体育馆 2 号场" }
-    ],
-    studyLogs: [
-      { id: "study-1", title: "高数习题", minutes: 35, time: minutesAgo(62), date: currentDate },
-      { id: "study-2", title: "英语单词", minutes: 20, time: minutesAgo(25), date: currentDate }
-    ],
-    habits: [
-      { id: "habit-1", title: "阅读 30 分钟", detail: "连续打卡 6 天", icon: "▤", streak: 6, checked: true, date: currentDate, tone: "" },
-      { id: "habit-2", title: "喝够 8 杯水", detail: "连续打卡 3 天", icon: "♧", streak: 3, checked: false, date: currentDate, tone: "peach-icon" },
-      { id: "habit-3", title: "拉伸 / 运动", detail: "连续打卡 2 天", icon: "⌁", streak: 2, checked: false, date: currentDate, tone: "violet-icon" }
-    ],
-    goals: [
-      { id: "goal-reading", type: "reading", title: "每月阅读", current: 4, target: 6, unit: "本", icon: "▤" },
-      { id: "goal-weight", type: "weight", title: "体重记录", current: 54.2, target: 53, unit: "kg", icon: "♡" },
-      { id: "goal-exercise", type: "exercise", title: "本周运动", current: 2, target: 4, unit: "次", icon: "⌁" }
-    ],
-    transactions: [
-      { id: "transaction-1", title: "食堂午餐", category: "餐饮", amount: 18, type: "expense", date: currentDate },
-      { id: "transaction-2", title: "打印课程资料", category: "学习", amount: 8, type: "expense", date: dateKey(new Date(today.getFullYear(), today.getMonth(), Math.max(1, today.getDate() - 1))) },
-      { id: "transaction-3", title: "本月生活费", category: "生活费", amount: 2500, type: "income", date: dateKey(new Date(today.getFullYear(), today.getMonth(), 1)) }
-    ],
-    reviews: {}
+    budget: 0,
+    tasks: [],
+    schedules: [],
+    studyLogs: [],
+    habits: [],
+    goals: [],
+    transactions: [],
+    reviews: {},
+    starterSamplesCleared: true
   });
 
   let state;
@@ -81,7 +90,39 @@
     if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.tasks) || !Array.isArray(parsed.schedules) || !Array.isArray(parsed.goals)) {
       throw new Error("本地保存的数据结构不完整");
     }
-    return { ...defaults(), ...parsed };
+    return clearUnmodifiedStarterData({
+      ...defaults(),
+      ...parsed,
+      starterSamplesCleared: parsed.starterSamplesCleared === true
+    });
+  }
+  function clearUnmodifiedStarterData(data) {
+    if (data.starterSamplesCleared) return data;
+
+    let changes = 0;
+    let untouchedBudgetExamples = 0;
+    for (const [collection, samples] of Object.entries(starterRecords)) {
+      const records = Array.isArray(data[collection]) ? data[collection] : [];
+      const keep = records.filter((record) => {
+        const sample = record && samples.find((item) => item.id === record.id);
+        const unchanged = sample && Object.entries(sample).every(([key, value]) => record[key] === value);
+        if (unchanged) {
+          changes += 1;
+          if (collection === "transactions") untouchedBudgetExamples += 1;
+          return false;
+        }
+        return true;
+      });
+      if (keep.length !== records.length) data[collection] = keep;
+    }
+
+    if (untouchedBudgetExamples === starterRecords.transactions.length && data.budget === 2500) {
+      data.budget = 0;
+      changes += 1;
+    }
+    data.starterSamplesCleared = true;
+    if (changes > 0) needsInitialSave = true;
+    return data;
   }
   function saveState(message) {
     try {
@@ -157,10 +198,13 @@
     const monthTransactions = state.transactions.filter((item) => isThisMonth(item.date));
     const expense = monthTransactions.filter((item) => item.type === "expense").reduce((sum, item) => sum + Number(item.amount), 0);
     const income = monthTransactions.filter((item) => item.type === "income").reduce((sum, item) => sum + Number(item.amount), 0);
-    const balance = Number(state.budget) - expense;
-    document.querySelector("#budget-remaining").textContent = `¥${money(balance)}`;
-    document.querySelector("#budget-progress-bar").style.width = `${Math.min(100, expense / Math.max(1, Number(state.budget)) * 100)}%`;
-    document.querySelector("#budget-caption").textContent = `本月已使用 ${Math.round(expense / Math.max(1, Number(state.budget)) * 100)}%`;
+    const budget = Number(state.budget) || 0;
+    const balance = budget - expense;
+    document.querySelector("#budget-remaining").textContent = budget > 0 ? `¥${money(balance)}` : "未设置";
+    document.querySelector("#budget-progress-bar").style.width = `${budget > 0 ? Math.min(100, expense / budget * 100) : 0}%`;
+    document.querySelector("#budget-caption").textContent = budget > 0
+      ? `本月已使用 ${Math.round(expense / budget * 100)}%`
+      : "前往账本设置每月预算";
   }
   function renderSchedule() {
     const weekStart = new Date(selectedWeek);
@@ -223,8 +267,9 @@
     const income = items.filter((item) => item.type === "income").reduce((sum, item) => sum + Number(item.amount), 0);
     document.querySelector("#month-expense").textContent = `¥${money(expense)}`;
     document.querySelector("#month-income").textContent = `¥${money(income)}`;
-    document.querySelector("#month-budget-label").textContent = `¥${money(Number(state.budget))}`;
-    document.querySelector("#finance-progress-bar").style.width = `${Math.min(100, expense / Math.max(1, Number(state.budget)) * 100)}%`;
+    const budget = Number(state.budget) || 0;
+    document.querySelector("#month-budget-label").textContent = budget > 0 ? `¥${money(budget)}` : "未设置 · 点击设定";
+    document.querySelector("#finance-progress-bar").style.width = `${budget > 0 ? Math.min(100, expense / budget * 100) : 0}%`;
     document.querySelector("#transaction-list").innerHTML = items.length ? items.slice(0, 4).map((item) => `<button class="transaction-item" type="button" data-edit-transaction="${escapeHtml(item.id)}" aria-label="编辑收支：${escapeHtml(item.title)}，点击以修改"><span class="transaction-icon ${item.type === "income" ? "income" : ""}">${item.type === "income" ? "↙" : "↗"}</span><span class="transaction-copy"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.category)} · ${displayDate(item.date)}</span></span><span class="transaction-amount ${item.type === "income" ? "income" : ""}">${item.type === "income" ? "+" : "−"}¥${money(item.amount)}</span><span class="transaction-edit-hint">编辑</span></button>`).join("") : '<div class="empty-state">记下第一笔收支，更了解生活费流向。</div>';
   }
   function renderGoals() {
@@ -263,7 +308,7 @@
     const validDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00`));
     const validTime = (value) => typeof value === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
     const validList = (value, validator) => Array.isArray(value) && value.length <= 5000 && value.every((item) => isRecord(item) && validId(item.id) && validator(item));
-    if (!isRecord(data) || !Number.isFinite(data.budget) || data.budget < 1 || data.budget > 10000000) return "预算数据不正确。";
+    if (!isRecord(data) || !Number.isFinite(data.budget) || data.budget < 0 || data.budget > 10000000) return "预算数据不正确。";
     if (!validList(data.tasks, (item) => validText(item.title) && validDate(item.date) && typeof item.done === "boolean" && ["high", "normal", "low"].includes(item.priority))) return "待办清单格式不正确。";
     if (!validList(data.schedules, (item) => validText(item.title) && ["course", "study"].includes(item.type) && Number.isInteger(item.day) && item.day >= 0 && item.day <= 6 && validTime(item.start) && validTime(item.end) && item.end > item.start && validText(item.location) && (item.type === "course" || !item.date || validDate(item.date)))) return "课程或学习安排格式不正确。";
     if (!validList(data.studyLogs, (item) => validText(item.title) && validDate(item.date) && validTime(item.time) && Number.isInteger(item.minutes) && item.minutes >= 1 && item.minutes <= 1440)) return "学习记录格式不正确。";
@@ -311,14 +356,19 @@
       notify("无法识别此备份文件或备份版本。");
       return;
     }
-    const issue = validateBackup(backup.data);
+    const migratedBackup = clearUnmodifiedStarterData({
+      ...defaults(),
+      ...backup.data,
+      starterSamplesCleared: backup.data.starterSamplesCleared === true
+    });
+    const issue = validateBackup(migratedBackup);
     if (issue) {
       notify(`备份未导入：${issue}`);
       return;
     }
     if (!window.confirm("导入备份会替换此设备上的所有待办、课表、记录与目标。建议先导出当前数据，再继续。")) return;
     const previousState = state;
-    state = backup.data;
+    state = migratedBackup;
     if (!saveState()) {
       state = previousState;
       return;
@@ -370,7 +420,7 @@
       { name: "review", label: "今天有什么值得记下？", type: "textarea", placeholder: "一件做得不错的事、一个小小的发现，或明天想完成的事……", full: true, value: "" }
     ] },
     budget: { title: "设置月预算", fields: [
-      { name: "budget", label: "每月生活费预算（元）", type: "number", min: "1", max: "10000000", required: true, value: 2500, full: true }
+      { name: "budget", label: "每月生活费预算（元）", type: "number", min: "1", max: "10000000", required: true, value: "", placeholder: "例如：2500", full: true }
     ] }
   };
 
@@ -399,7 +449,7 @@
       values.start = day < 5 ? "09:00" : "10:00";
     }
     if (kind === "review") values.review = state.reviews[currentDate] || "";
-    if (kind === "budget") values.budget = state.budget;
+    if (kind === "budget") values.budget = state.budget > 0 ? state.budget : "";
     const deletable = ["schedule", "study", "habit", "transaction", "goal"];
     const deleteButton = document.querySelector("#dialog-delete");
     deleteButton.hidden = !record || !deletable.includes(kind);
@@ -657,7 +707,23 @@
     document.querySelector("#timer-status").textContent = "专注一会儿";
     updateTimerDisplay();
   });
-  document.querySelector("#month-budget-label").addEventListener("keydown", (event) => { if (event.key === "Enter") openForm("budget"); });
+  document.querySelector("#month-budget-label").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openForm("budget");
+    }
+  });
+  document.querySelector("#budget-caption").setAttribute("role", "button");
+  document.querySelector("#budget-caption").tabIndex = 0;
+  document.querySelector("#budget-caption").title = "点击设置月预算";
+  document.querySelector("#budget-caption").style.cursor = "pointer";
+  document.querySelector("#budget-caption").addEventListener("click", () => openForm("budget"));
+  document.querySelector("#budget-caption").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openForm("budget");
+    }
+  });
   document.querySelector("#week-grid").addEventListener("keydown", (event) => {
     const card = event.target.closest("[data-edit-schedule]");
     if (card && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); card.click(); }
@@ -700,7 +766,7 @@
   } catch (error) {
     console.error("无法读取已保存的数据", error);
     state = defaults();
-    notify("之前保存的数据无法读取，已载入演示数据；原始数据未被覆盖。");
+    notify("之前保存的数据无法读取，已载入空白工作台；原始数据未被覆盖。");
   }
   document.querySelector("#month-budget-label").setAttribute("role", "button");
   document.querySelector("#month-budget-label").tabIndex = 0;

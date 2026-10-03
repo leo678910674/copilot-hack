@@ -13,14 +13,15 @@
 - 健康目标：追踪阅读、体重、运动目标及自定义目标，并能自由修改或删除目标。
 - 个性称呼为“老弟”；桌面左下角显示白底头像。
 - 可调节 15、25、50、90 分钟专注时间；对待办、课程、学习记录、习惯、账目和目标进行编辑管理。
-- 数据使用浏览器 `localStorage` 本地保存；首次打开会载入可编辑的演示数据。数据仅属于当前浏览器和设备。
+- 数据使用浏览器 `localStorage` 本地保存；首次打开是空白工作台，课程、待办、习惯、目标、收支和预算均由你自行添加。数据仅属于当前浏览器和设备。
+- 从旧版升级时，会自动移除未修改的内置演示条目和演示预算，保留用户修改过的条目及自行新增的数据；预算未设置时显示“未设置”，可在账本中点击设置。
 - 一键导出 JSON 数据备份；导入之前会验证备份格式，并在覆盖已有数据前要求确认。
 - 支持安装为桌面 / 手机 PWA，首次访问时即可缓存应用资源，之后能够离线使用。
 
 ## 在线使用与安装
 
 - **在线网址（HTTPS，支持手机和电脑）**：https://leo678910674.github.io/copilot-hack/
-- **下载完整 Windows / PWA 安装包**：[manmanlai-study-life-installer.zip](https://github.com/leo678910674/copilot-hack/releases/download/manmanlai-v1.0.0/manmanlai-study-life-installer.zip)。
+- **下载完整 Windows / PWA 安装包**：[manmanlai-study-life-installer.zip](https://github.com/leo678910674/copilot-hack/releases/download/manmanlai-v1.0.1/manmanlai-study-life-installer.zip)。
 - **手机安装**：使用手机浏览器打开在线网址，选择“安装应用”或“添加到主屏幕”。iPhone / iPad 请在 Safari 中选择“分享 → 添加到主屏幕”。首次访问需要网络以缓存应用，之后可离线使用。
 
 ## 使用
