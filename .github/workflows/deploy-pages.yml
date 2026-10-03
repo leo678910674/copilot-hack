@@ -1,0 +1,35 @@
+name: Publish learning life PWA
+
+on:
+  push:
+    branches:
+      - leo678910674-study-life-management
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: learning-life-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out app
+        uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Package static application
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy application
+        id: deployment
+        uses: actions/deploy-pages@v4
