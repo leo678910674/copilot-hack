@@ -36,8 +36,8 @@
           <span>给今天的你</span>
         </div>
         <div class="sidebar-profile">
-          <div class="avatar">林</div>
-          <div><strong>林同学</strong><span>把日子过成喜欢的样子</span></div>
+          <div class="avatar" aria-label="老弟">老弟</div>
+          <div><strong>老弟</strong><span>把日子过成喜欢的样子</span></div>
           <span class="profile-dots" aria-hidden="true">···</span>
         </div>
       </aside>
@@ -196,6 +196,12 @@
         <p class="form-error" id="form-error" role="alert"></p>
         <div class="dialog-actions"><button class="button button-danger" type="button" id="dialog-delete" hidden>删除记录</button><button class="button button-outline" type="button" id="dialog-cancel">取消</button><button class="button button-primary" type="submit">保存</button></div>
       </form>
+    </dialog>
+    <dialog id="overdue-dialog" class="reminder-dialog" aria-labelledby="overdue-title" aria-describedby="overdue-message">
+      <div class="reminder-icon" aria-hidden="true">✦</div>
+      <h2 id="overdue-title">新的一天，慢慢来</h2>
+      <p id="overdue-message"></p>
+      <button class="button button-primary" id="overdue-dismiss" type="button">好的，继续加油</button>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </body>

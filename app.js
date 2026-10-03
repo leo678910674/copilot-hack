@@ -240,6 +240,22 @@
     document.querySelector("#weight-note").textContent = weight ? `最近一次体重记录：${Number(weight.current)} kg · 记录仅供自己参考，轻松看待每一天。` : "慢慢记录，轻松看待每一天。";
   }
 
+  function showOverdueTaskReminder() {
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayKey = dateKey(yesterday);
+    const overdue = state.tasks.filter((task) => task.date === yesterdayKey && !task.done);
+    if (!overdue.length || state.overdueReminderShownFor === currentDate) return;
+
+    state.overdueReminderShownFor = currentDate;
+    if (!saveState()) return;
+    const amount = overdue.length;
+    document.querySelector("#overdue-message").textContent = amount === 1
+      ? "昨天还有 1 件待办没完成。没关系，今天挑一件继续吧，老弟。"
+      : `昨天还有 ${amount} 件待办没完成。没关系，今天挑一件继续吧，老弟。`;
+    document.querySelector("#overdue-dialog").showModal();
+  }
+
   function validateBackup(data) {
     const isRecord = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
     const validText = (value, max = 500) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
@@ -528,6 +544,7 @@
   document.querySelector("#week-prev").addEventListener("click", () => { selectedWeek.setDate(selectedWeek.getDate() - 7); renderSchedule(); });
   document.querySelector("#week-next").addEventListener("click", () => { selectedWeek.setDate(selectedWeek.getDate() + 7); renderSchedule(); });
   document.querySelector("#review-button").addEventListener("click", () => openForm("review"));
+  document.querySelector("#overdue-dismiss").addEventListener("click", () => document.querySelector("#overdue-dialog").close());
   document.querySelector("#export-data").addEventListener("click", exportBackup);
   document.querySelector("#import-data").addEventListener("click", () => document.querySelector("#backup-file").click());
   document.querySelector("#backup-file").addEventListener("change", async (event) => {
@@ -689,5 +706,6 @@
   document.querySelector("#month-budget-label").tabIndex = 0;
   updateTimerDisplay();
   render();
+  showOverdueTaskReminder();
   if (needsInitialSave) saveState();
 })();
