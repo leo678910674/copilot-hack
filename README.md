@@ -21,7 +21,7 @@
 ## 在线使用与安装
 
 - **在线网址（HTTPS，支持手机和电脑）**：https://leo678910674.github.io/copilot-hack/
-- **下载完整 Windows / PWA 安装包**：[manmanlai-study-life-installer.zip](https://github.com/leo678910674/copilot-hack/releases/download/manmanlai-v1.0.2/manmanlai-study-life-installer.zip)。
+- **Windows 电脑直接下载安装程序（EXE，无需解压）**：[直接下载慢慢来 Windows 安装程序](https://github.com/leo678910674/copilot-hack/releases/download/manmanlai-v1.0.3/manmanlai-windows-installer.exe)。
 - **手机安装**：使用手机浏览器打开在线网址，选择“安装应用”或“添加到主屏幕”。iPhone / iPad 请在 Safari 中选择“分享 → 添加到主屏幕”。首次访问需要网络以缓存应用，之后可离线使用。
 
 ## 使用
@@ -34,7 +34,9 @@ python -m http.server 8000
 
 然后访问 `http://localhost:8000`。页面使用原生 HTML、CSS 和 JavaScript，不需要构建步骤。
 
-Windows 用户解压安装包后双击“安装.cmd”即可启动；桌面浏览器也可打开在线网站安装 PWA。手机和平板请打开在线 HTTPS 网站选择浏览器“安装 / 添加到主屏幕”。iPhone / iPad 请通过 Safari 的“分享 → 添加到主屏幕”安装。
+Windows 用户点击上方 EXE 链接下载后双击运行，无需解压；安装程序会创建桌面和开始菜单快捷方式并启动应用。配套的本机服务窗口请在使用期间保持打开，关闭窗口即可停止服务。手机和平板请打开在线 HTTPS 网站选择浏览器“安装 / 添加到主屏幕”。iPhone / iPad 请通过 Safari 的“分享 → 添加到主屏幕”安装。
+
+Windows 安装程序可在 Windows 上通过 `powershell.exe -ExecutionPolicy Bypass -File .\build-windows-installer.ps1` 重新构建；它使用 Windows PowerShell 和 .NET Framework 自带的 C# 编译器，不需要额外的打包依赖。
 
 ## 设计参考
 
