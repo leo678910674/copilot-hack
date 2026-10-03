@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "manmanlai-app-v5";
+const CACHE_NAME = "manmanlai-app-v6";
 const APP_ASSETS = [
   "./",
   "./index.html",

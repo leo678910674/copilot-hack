@@ -64,7 +64,7 @@
     goals: [],
     transactions: [],
     reviews: {},
-    starterSamplesCleared: true
+    starterSamplesCleared: 2
   });
 
   let state;
@@ -93,14 +93,13 @@
     return clearUnmodifiedStarterData({
       ...defaults(),
       ...parsed,
-      starterSamplesCleared: parsed.starterSamplesCleared === true
+      starterSamplesCleared: parsed.starterSamplesCleared === 2
     });
   }
   function clearUnmodifiedStarterData(data) {
-    if (data.starterSamplesCleared) return data;
+    if (data.starterSamplesCleared === 2) return data;
 
     let changes = 0;
-    let untouchedBudgetExamples = 0;
     for (const [collection, samples] of Object.entries(starterRecords)) {
       const records = Array.isArray(data[collection]) ? data[collection] : [];
       const keep = records.filter((record) => {
@@ -108,7 +107,6 @@
         const unchanged = sample && Object.entries(sample).every(([key, value]) => record[key] === value);
         if (unchanged) {
           changes += 1;
-          if (collection === "transactions") untouchedBudgetExamples += 1;
           return false;
         }
         return true;
@@ -116,11 +114,11 @@
       if (keep.length !== records.length) data[collection] = keep;
     }
 
-    if (untouchedBudgetExamples === starterRecords.transactions.length && data.budget === 2500) {
+    if (data.budget === 2500) {
       data.budget = 0;
       changes += 1;
     }
-    data.starterSamplesCleared = true;
+    data.starterSamplesCleared = 2;
     if (changes > 0) needsInitialSave = true;
     return data;
   }
@@ -359,7 +357,7 @@
     const migratedBackup = clearUnmodifiedStarterData({
       ...defaults(),
       ...backup.data,
-      starterSamplesCleared: backup.data.starterSamplesCleared === true
+      starterSamplesCleared: backup.data.starterSamplesCleared === 2
     });
     const issue = validateBackup(migratedBackup);
     if (issue) {
